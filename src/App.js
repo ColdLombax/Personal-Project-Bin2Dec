@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Background from "./components/Background/Background";
 import classes from "./App.module.scss";
 
 function App() {
   const [binary, setBinary] = useState("");
-  // const [decimal, setDecimal] = useState(0);
+  const [decimal, setDecimal] = useState("");
+  const [error, setError] = useState(false);
+
+  const messages = {
+    input: <p className={classes.waiting}>Waiting for Input...</p>,
+    value: <p className={classes.value}>{decimal}</p>,
+    invalid: <p className={classes.error}>Invalid Binary Number</p>,
+  };
 
   // CONVERTS BINARY INTO DECIMAL AND SETS STATE
   // const binaryHandler = (event) => {
@@ -21,19 +28,34 @@ function App() {
   //   setBinary(result);
   // };
 
-  const [error, setError] = useState(false);
-
+  // *** BINARY CONVERSTION HANDLERS ***
   const binaryHandler = (event) => {
     const stringNumber = event.target.value;
     const pattern = new RegExp("[2-9]");
     if (pattern.test(stringNumber)) {
       setError(true);
-      console.log("has a number greater than 1");
     } else {
       setError(false);
     }
+
     setBinary(event.target.value);
+
+    if (!error) {
+    }
   };
+
+  const convertBinary = () => {
+    const digit = parseInt(binary, 2);
+    setDecimal(digit.toString());
+  };
+
+  useEffect(() => {
+    if (!error) {
+      convertBinary();
+    }
+  }, [binary]);
+
+  // *** DECIMAL CONVERSTION HANDLERS ***
 
   return (
     <div>
@@ -48,20 +70,13 @@ function App() {
         <section className={classes.main}>
           <input
             type="number"
-            pattern="1(0∗1)∗ "
             value={binary}
             onChange={binaryHandler}
             className={classes.input}
           ></input>
-          {error ? (
-            <p className={classes.error}>Invalid Binary Number</p>
-          ) : (
-            <p className={classes.value}>{binary}</p>
-          )}
-
-          {binary === "" && (
-            <p className={classes.waiting}>Waiting for Input...</p>
-          )}
+          {error && messages.invalid}
+          {decimal > -1 && messages.value}
+          {binary === "" && messages.input}
         </section>
         <footer>
           <p className={classes.stamp}>
