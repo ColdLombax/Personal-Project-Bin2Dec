@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/bin2dec-project/static/css/main.696cd3e6.chunk.css",
+    "main.js": "/bin2dec-project/static/js/main.2541acf5.chunk.js",
+    "main.js.map": "/bin2dec-project/static/js/main.2541acf5.chunk.js.map",
+    "runtime-main.js": "/bin2dec-project/static/js/runtime-main.3c740d76.js",
+    "runtime-main.js.map": "/bin2dec-project/static/js/runtime-main.3c740d76.js.map",
+    "static/js/2.a988b718.chunk.js": "/bin2dec-project/static/js/2.a988b718.chunk.js",
+    "static/js/2.a988b718.chunk.js.map": "/bin2dec-project/static/js/2.a988b718.chunk.js.map",
+    "index.html": "/bin2dec-project/index.html",
+    "static/css/main.696cd3e6.chunk.css.map": "/bin2dec-project/static/css/main.696cd3e6.chunk.css.map",
+    "static/js/2.a988b718.chunk.js.LICENSE.txt": "/bin2dec-project/static/js/2.a988b718.chunk.js.LICENSE.txt",
+    "static/media/Background.module.scss": "/bin2dec-project/static/media/bg.d84e303a.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3c740d76.js",
+    "static/js/2.a988b718.chunk.js",
+    "static/css/main.696cd3e6.chunk.css",
+    "static/js/main.2541acf5.chunk.js"
+  ]
+}
