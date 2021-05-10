@@ -6,27 +6,21 @@ function App() {
   const [binary, setBinary] = useState("");
   const [decimal, setDecimal] = useState("");
   const [error, setError] = useState(false);
+  const [isBinary, setIsBinary] = useState(true);
 
   const messages = {
     input: <p className={classes.waiting}>Waiting for Input...</p>,
-    value: <p className={classes.value}>{decimal}</p>,
+    convBinary: <p className={classes.value}>{decimal}</p>,
+    convDecimal: <p className={classes.value}>{binary}</p>,
     invalid: <p className={classes.error}>Invalid Binary Number</p>,
   };
 
-  // CONVERTS BINARY INTO DECIMAL AND SETS STATE
-  // const binaryHandler = (event) => {
-  //   setBinary(event.target.value);
-  //   const digit = parseInt(event.target.value, 2);
-  //   setDecimal(digit);
-  // };
-
-  // CONVERTS DECIMAL INTO BINARY AND SETS STATE
-  // const decimalHandler = (event) => {
-  //   setDecimal(event.target.value);
-  //   const number = parseInt(event.target.value);
-  //   const result = number.toString(2);
-  //   setBinary(result);
-  // };
+  const clickHandler = () => {
+    setIsBinary(!isBinary);
+    setBinary("");
+    setDecimal("");
+    setError(false);
+  };
 
   // *** BINARY CONVERSTION HANDLERS ***
   const binaryHandler = (event) => {
@@ -39,9 +33,6 @@ function App() {
     }
 
     setBinary(event.target.value);
-
-    if (!error) {
-    }
   };
 
   const convertBinary = () => {
@@ -50,32 +41,62 @@ function App() {
   };
 
   useEffect(() => {
-    if (!error) {
+    if (!error && isBinary) {
       convertBinary();
+    } else if (!error && !isBinary) {
+      convertDecimal();
     }
-  }, [binary]);
+  }, [binary, decimal]);
 
   // *** DECIMAL CONVERSTION HANDLERS ***
+  const decimalHandler = (event) => {
+    setDecimal(event.target.value);
+  };
+
+  const convertDecimal = () => {
+    const number = parseInt(decimal);
+    const result = number.toString(2);
+    setBinary(result);
+  };
+
+  const inputs = {
+    binary: (
+      <input
+        type="number"
+        value={binary}
+        onChange={binaryHandler}
+        className={classes.input}
+      ></input>
+    ),
+    decimal: (
+      <input
+        type="number"
+        value={decimal}
+        onChange={decimalHandler}
+        className={classes.input}
+      ></input>
+    ),
+  };
 
   return (
     <div>
       <Background />
       <div className={classes.content}>
         <header>
-          <h1 className={classes.title}>{`Bin\\2/Dec`}</h1>
+          <h1 className={classes.title}>
+            {isBinary ? "Bin\\2/Dec" : "Dec\\2/Bin"}
+          </h1>
           <p className={classes.description}>
-            Enter a Binary number, converts into Decimal
+            Enter a {isBinary ? "Binary" : "Decimal"} number, converts into
+            {isBinary ? " Binary" : " Decimal"}
           </p>
         </header>
         <section className={classes.main}>
-          <input
-            type="number"
-            value={binary}
-            onChange={binaryHandler}
-            className={classes.input}
-          ></input>
+          {isBinary && inputs.binary}
+          {!isBinary && inputs.decimal}
           {error && messages.invalid}
-          {decimal > -1 && messages.value}
+          {decimal > -1 && isBinary && messages.convBinary}
+          {binary > -1 && !isBinary && messages.convDecimal}
           {binary === "" && messages.input}
         </section>
         <footer>
@@ -83,7 +104,9 @@ function App() {
             Made with <span style={{ color: `rgb(116, 50, 163)` }}>❤</span> -
             John Phillips
           </p>
-          <button className={classes.btn}>DECIMAL</button>
+          <button onClick={clickHandler} className={classes.btn}>
+            {isBinary ? "DECIMAL" : "BINARY"}
+          </button>
         </footer>
       </div>
     </div>
