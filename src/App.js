@@ -1,29 +1,50 @@
-import classes from "./styles/App.module.scss";
+import { useState } from "react";
+import Background from "./components/Background/Background";
+import classes from "./App.module.scss";
 
 function App() {
-  const convertToDecimal = () => {
-    console.log("decimal");
+  const [binary, setBinary] = useState(0);
+  const [decimal, setDecimal] = useState(0);
+
+  // CONVERTS BINARY INTO DECIMAL AND SETS STATE
+  const binaryHandler = (event) => {
+    setBinary(event.target.value);
+    const digit = parseInt(event.target.value, 2);
+    setDecimal(digit);
   };
 
-  const convertToBinary = () => {
-    console.log("binary");
+  // CONVERTS DECIMAL INTO BINARY AND SETS STATE
+  const decimalHandler = (event) => {
+    setDecimal(event.target.value);
+    const number = parseInt(event.target.value);
+    const result = number.toString(2);
+    setBinary(result);
   };
 
   return (
     <div>
-      <div className={classes.background}></div>
-      <div className={classes.blur}></div>
-      <div className={classes.flex}>
-        <input onChange={convertToDecimal}></input>
-        <input onChange={convertToDecimal}></input>
+      <Background />
+      <div className={classes.content}>
+        <header>
+          <h1 className={classes.title}>{`Bin\\2/Dec`}</h1>
+          <p className={classes.description}>
+            Enter a Binary number, converts into Decimal
+          </p>
+        </header>
+        <section className={classes.main}>
+          <input className={classes.input}></input>
+          <p className={classes.value}>Waiting for Input...</p>
+        </section>
+        <footer>
+          <p className={classes.stamp}>
+            Made with <span style={{ color: `rgb(116, 50, 163)` }}>❤</span> -
+            John Phillips
+          </p>
+          <button className={classes.btn}>DECIMAL</button>
+        </footer>
       </div>
     </div>
   );
 }
 
 export default App;
-
-// Create an input that can only take 1/0's for the binary conversion.
-// Convert on every keystroke update
-
-// reverse the input so if digits are inputed in the other box then return binary
