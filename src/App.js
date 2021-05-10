@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+
 import Background from "./components/Background/Background";
+
 import classes from "./App.module.scss";
 
 function App() {
@@ -98,6 +100,7 @@ function App() {
           {decimal > -1 && isBinary && messages.convBinary}
           {binary > -1 && !isBinary && messages.convDecimal}
           {binary === "" && messages.input}
+          {decimal === "" && messages.input}
         </section>
         <footer>
           <p className={classes.stamp}>

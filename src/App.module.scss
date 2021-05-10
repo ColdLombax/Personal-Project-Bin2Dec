@@ -92,6 +92,9 @@ footer {
   .stamp {
     margin: auto;
     padding: 20px;
+    &:focus {
+      outline: $accent-color;
+    }
   }
 
   // Switch Button
@@ -105,6 +108,9 @@ footer {
     letter-spacing: 0.2em;
     &:hover {
       border-color: $accent-color;
+    }
+    &:focus {
+      outline: $accent-color;
     }
   }
 }
