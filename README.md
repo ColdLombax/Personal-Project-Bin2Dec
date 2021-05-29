@@ -1,7 +1,7 @@
 # Project Details
 This is a small little website that uses react to convert binary into decimal and visaversa.
 
-Check out the [DEMO](http://coldlombax.github.io/bin2dec-project)
+Check out the [DEMO](https://coldlombax.github.io/Personal-Project-Bin2Dec/)
 
 ## Motivation
 I have been struggling to make a complete project, this was my goal, to start small and continue my development.
