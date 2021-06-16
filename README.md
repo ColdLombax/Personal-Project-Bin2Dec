@@ -1,5 +1,5 @@
 # Bin2Dec
-A simple website to convert binary (BASE 2) into decimal (BASE 10) and visaversa.
+A simple website to convert binary (BASE 2) into decimal (BASE 10) and visa versa.
 #### The Good
 - Happy with Color Scheme.
 - Error Handling
